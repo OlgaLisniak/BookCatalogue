@@ -196,7 +196,6 @@
     </Compile>
     <Compile Include="Models\Book.cs" />
     <Compile Include="DAL\BookContext.cs" />
-    <Compile Include="Models\GenreViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
