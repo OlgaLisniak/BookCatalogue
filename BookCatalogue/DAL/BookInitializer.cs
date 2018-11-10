@@ -4,7 +4,7 @@ using System.Data.Entity;
 
 namespace BookCatalogue.DAL
 {
-    public class BookInitializer : DropCreateDatabaseIfModelChanges<BookContext>
+    public class BookInitializer : DropCreateDatabaseAlways<BookContext>
     {
         protected override void Seed(BookContext context)
         {
@@ -21,7 +21,7 @@ namespace BookCatalogue.DAL
                 new Book{Id = 9, Name = "Цветы для Элджернона", Author = "Дэниел Киз", Year = 2017, PublishingHouse = "АСТ", Genre = Genre.Fantasy},
                 new Book{Id = 10, Name = "Приключения Тома Сойера", Author = "Марк Твен", Year = 2017, PublishingHouse = "Нигма", Genre = Genre.Adventure}
             };
-            books.ForEach(s => context.Books.Add(s));
+            context.Books.AddRange(books);
             context.SaveChanges();
         }
     }

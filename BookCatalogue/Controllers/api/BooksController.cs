@@ -20,7 +20,7 @@ namespace BookCatalogue.Controllers.api
                 books = db.Books.ToList();
             }
 
-            if(books.Count == 0)
+            if(!books.Any())
             {
                 return NotFound();
             }
@@ -35,7 +35,7 @@ namespace BookCatalogue.Controllers.api
 
             using (var db = new BookContext())
             {
-                book = db.Books.Where(b => b.Id == id).FirstOrDefault();
+                book = db.Books.Find(id);
             }
 
             if (book == null)
@@ -56,7 +56,7 @@ namespace BookCatalogue.Controllers.api
                 books = db.Books.Where(b => b.Genre.ToString() == genre).ToList();
             }
 
-            if (books.Count() == 0)
+            if (!books.Any())
             {
                 return NotFound();
             }

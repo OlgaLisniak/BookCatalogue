@@ -9,13 +9,15 @@ namespace BookCatalogue.Controllers
 {
     public class BookController : Controller
     {
+        private readonly string pathAPI = "http://localhost:53539/api/";
+
         public ActionResult Index()
         {
             IEnumerable<Book> books = null;
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:53539/api/");
+                client.BaseAddress = new Uri(pathAPI);
                 //HTTP GET
                 var responseTask = client.GetAsync("books");
                 responseTask.Wait();
@@ -30,7 +32,6 @@ namespace BookCatalogue.Controllers
                 }
                 else
                 {
-
                     books = Enumerable.Empty<Book>();
 
                     ModelState.AddModelError(string.Empty, "Server error.");
@@ -49,7 +50,7 @@ namespace BookCatalogue.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:53539/api/books");
+                client.BaseAddress = new Uri(pathAPI + "/books");
 
                 //HTTP POST
                 var postTask = client.PostAsJsonAsync<Book>("books", book);
@@ -73,7 +74,7 @@ namespace BookCatalogue.Controllers
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:53539/api/");
+                client.BaseAddress = new Uri(pathAPI);
                 //HTTP GET
                 var responseTask = client.GetAsync("books?id=" + id.ToString());
                 responseTask.Wait();
@@ -96,7 +97,7 @@ namespace BookCatalogue.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:53539/api/books");
+                client.BaseAddress = new Uri(pathAPI + "/books");
 
                 //HTTP POST
                 var putTask = client.PutAsJsonAsync<Book>("books", book);
@@ -116,7 +117,7 @@ namespace BookCatalogue.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:53539/api/");
+                client.BaseAddress = new Uri(pathAPI);
 
                 //HTTP DELETE
                 var deleteTask = client.DeleteAsync("books/" + id.ToString());
@@ -139,7 +140,7 @@ namespace BookCatalogue.Controllers
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:53539/api/");
+                client.BaseAddress = new Uri(pathAPI);
                 //HTTP GET
                 var responseTask = client.GetAsync("books?id=" + id.ToString());
                 responseTask.Wait();
@@ -163,7 +164,7 @@ namespace BookCatalogue.Controllers
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:53539/api/");
+                client.BaseAddress = new Uri(pathAPI);
                 //HTTP GET
                 var responseTask = client.GetAsync("books?genre=" + genre);
                 responseTask.Wait();
